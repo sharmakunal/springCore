@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+<context:annotation-config/>
+
+    <bean id="database" class="Database">
+        <property name="port" value="8080"></property>
+        <property name="name" value="Wamp"></property>
+    </bean>
+
+
+    <bean id="tea" class="Tea">
+    </bean>
+
+    <bean id="expressTea" class="ExpressTea">
+    </bean>
+
+   <bean id="teaRestaurant" class="Restaurant" scope="prototype">
+       <property name="hotDrink" ref="tea"></property>
+    </bean>
+
+    <bean id="teaRestaurant1" class="Restaurant">
+        <property name="hotDrink">
+            <bean name="expressTea1" class="ExpressTea">
+            </bean>
+        </property>
+    </bean>
+
+    <bean name="teaRestaurant2" class="Restaurant" autowire="byName">
+        <property name="hotDrink" ref="tea"></property>
+    </bean>
+    <bean name="teaRestaurant3" class="Restaurant" autowire="byType">
+        <property name="hotDrink" ref="tea"></property>
+    </bean>
+    <bean name="teaRestaurant4" class="Restaurant" autowire="constructor">
+        <property name="hotDrink" ref="tea"></property>
+    </bean>
+
+
+
+    <bean  name="complexBean" class="Complex">
+        <property name="list">
+            <list>
+                <value>value1</value>
+                <value>value2</value>
+            </list>
+       </property>
+      <property name="map">
+          <map>
+              <entry key="key-1" value="value-1"/>
+              <entry key="key-2" value="value-2"/>
+          </map>
+      </property>
+      <property name="set">
+          <set>
+              <value>val2</value>
+              <value>val3</value>
+          </set>
+      </property>
+    </bean>
+</beans>
+
